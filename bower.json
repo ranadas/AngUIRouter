@@ -1,0 +1,21 @@
+{
+  "name": "ang-ui-routing",
+  "description": "AngularUI Riuting Project",
+  "main": "weba.js",
+  "authors": [
+    "Rana Das"
+  ],
+  "license": "ISC",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-material": "^1.1.1",
+    "angular-material-icons": "^0.7.1"
+  }
+}

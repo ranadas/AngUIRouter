@@ -1,0 +1,14 @@
+{
+  "name": "angular-material-pluralsight",
+  "version": "1.0.0",
+  "description": "",
+  "main": "weba.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Rana Das",
+  "license": "ISC",
+  "dependencies": {
+    "live-server": "^1.1.0"
+  }
+}
