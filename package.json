@@ -9,6 +9,11 @@
   "author": "Rana Das",
   "license": "ISC",
   "dependencies": {
-    "live-server": "^1.1.0"
+    "body-parser": "^1.15.2",
+    "error-handler": "^1.0.0",
+    "express": "^4.14.0",
+    "live-server": "^1.1.0",
+    "method-override": "^2.3.6",
+    "morgan": "^1.7.0"
   }
 }
