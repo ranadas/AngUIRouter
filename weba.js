@@ -11,6 +11,7 @@ var methodOverride = require('method-override');    // simulate DELETE and PUT (
 var errorHandler = require('error-handler');
 var http = require('http');
 var path = require('path');
+var favicon = require('serve-favicon');
 
 //var mongoose = require('mongoose');                     // mongoose for mongodb
 // configuration =================
@@ -32,10 +33,44 @@ app.use(bodyParser.json());                                     // parse applica
 app.use(bodyParser.json({type: 'application/vnd.api+json'})); // parse application/vnd.api+json as json
 app.use(methodOverride());
 
+//var routes = require('./routes/index');
+var users = require('./routes/users');
 
-app.get('*', function(req, res) {
+
+app.get('/', function(req, res) {
     res.sendfile('./app/index.html'); // load the single view file (angular will handle the page changes on the front-end)
 });
+
+app.use('/users', users);
+
+
+/// error handlers
+
+// development error handler
+// will print stacktrace
+if (app.get('env') === 'development') {
+    app.use(function(err, req, res, next) {
+        res.status(err.status || 500);
+        res.render('error', {
+            message: err.message,
+            error: err
+        });
+    });
+}
+
+// production error handler
+// no stacktraces leaked to user
+app.use(function(err, req, res, next) {
+    res.status(err.status || 500);
+    res.render('error', {
+        message: err.message,
+        //error: {} // this is the actual way not to return stack trace to user
+        error: err
+    });
+});
+
+
+module.exports = app;
 
 
 app.listen(port);
