@@ -1,14 +1,14 @@
 'use strict';
 
-var routerApp = angular.module('routerApp', ['ui.router']);
+var routerApp = angular.module('routerApp', ['ui.router', 'contactsModule']);
 
 
-routerApp.config(function($stateProvider, $urlRouterProvider) {
+routerApp.config(function ($stateProvider, $urlRouterProvider) {
 
     $urlRouterProvider.otherwise('/home');
 
     $stateProvider
-        // HOME STATES AND NESTED VIEWS ========================================
+    // HOME STATES AND NESTED VIEWS ========================================
         .state('home', {
             url: '/home',
             templateUrl: './app/dist/views/partial-home.html'
@@ -21,14 +21,27 @@ routerApp.config(function($stateProvider, $urlRouterProvider) {
 
         })
 
-        .state('courses' ,{
+        .state('courses', {
             url: '/courses',
             template: '<b> WIP</b> '
         })
 
-        .state('contacts' ,{
+        .state('contacts', {
             url: '/contacts',
-            template: '<b> WIP!</b> '
+            templateUrl: './app/dist/views/partial-contact.html',
+            controller: ContactController,
+            controllerAs: 'cntCtrl'
         })
-        ;
+    ;
 });
+
+// Controller for partial-contact.html
+function ContactController(contactsService) {
+    this.contacts =  contactsService.contactType;
+
+    console.log('ContactController' + this.contacts);
+
+    this.getAllUsers = function(){
+        return contactsService.allUsers();
+    }
+}
