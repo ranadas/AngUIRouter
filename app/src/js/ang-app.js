@@ -11,13 +11,13 @@ routerApp.config(function ($stateProvider, $urlRouterProvider) {
     // HOME STATES AND NESTED VIEWS ========================================
         .state('home', {
             url: '/home',
-            templateUrl: './app/dist/views/partial-home.html'
+            templateUrl: 'dist/views/partial-home.html'
         })
         // ABOUT PAGE AND MULTIPLE NAMED VIEWS =================================
         .state('about', {
             // we'll get to this in a bit
             url: '/about',
-            templateUrl: './app/dist/views/partial-about.html'
+            templateUrl: 'dist/views/partial-about.html'
 
         })
 
@@ -28,7 +28,7 @@ routerApp.config(function ($stateProvider, $urlRouterProvider) {
 
         .state('contacts', {
             url: '/contacts',
-            templateUrl: './app/dist/views/partial-contact.html',
+            templateUrl: 'dist/views/partial-contact.html',
             controller: ContactController,
             controllerAs: 'cntCtrl'
         })
