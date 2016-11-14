@@ -2,23 +2,18 @@
 
 var routerApp = angular.module('routerApp', ['ui.router', 'contactsModule']);
 
-
 routerApp.config(function ($stateProvider, $urlRouterProvider) {
 
     $urlRouterProvider.otherwise('/home');
 
     $stateProvider
-    // HOME STATES AND NESTED VIEWS ========================================
         .state('home', {
             url: '/home',
             templateUrl: 'dist/views/partial-home.html'
         })
-        // ABOUT PAGE AND MULTIPLE NAMED VIEWS =================================
         .state('about', {
-            // we'll get to this in a bit
             url: '/about',
             templateUrl: 'dist/views/partial-about.html'
-
         })
 
         .state('courses', {
@@ -36,12 +31,30 @@ routerApp.config(function ($stateProvider, $urlRouterProvider) {
 });
 
 // Controller for partial-contact.html
-function ContactController(contactsService) {
-    this.contacts =  contactsService.contactType;
+function ContactController(contactsService, $http) {
+    var self = this;
 
-    console.log('ContactController' + this.contacts);
+    self.contacts =  contactsService.contactTypes;
+    console.log('ContactController ' + self.contacts);
 
-    this.getAllUsers = function(){
-        return contactsService.allUsers();
-    }
+    (function getAllUsersSelfExecutingFunc() {
+        $http.get('/users/userlist')
+            .then(function successCallaback(response) {
+                    console.log("END in (self ex) : " + JSON.stringify(response.data));
+                    self.allUsrs = response.data;
+                }, function errorCallback(response) {
+                    console.log("Error " + response);
+                }
+            );
+    })();
+
+
+    function getAllUsersFromService() {
+        console.log('1.getting users from http Service.');
+        var returnedArray = contactsService.allUsers();
+        console.log("4. (returning response ) " + JSON.stringify(returnedArray));
+        return returnedArray;
+    };
+
+    self.getAllUsers = getAllUsersFromService;
 }

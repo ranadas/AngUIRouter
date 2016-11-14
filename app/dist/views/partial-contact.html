@@ -2,12 +2,27 @@
 
 <h4>All Contacts</h4>
 
-<ul>
-    <li ng-repeat='user in cntCtrl.getAllUsers()'>
-        {{user.name}}
-    </li>
-</ul>
+<!--<div ng-init="users = cntCtrl.allUsrs">-->
+    <!--<div> {{users}}</div>-->
+    <!--<div ng-repeat="user in users">-->
+        <!--{{$index + 1}}. {{user.name}}.-->
+    <!--</div>-->
+<!--</div>-->
+
+ <!--Strangest issue, this ideally should call http service once, but it calls in -->
+<!--many times. WHY???? -->
+<!--<p ng-repeat="user in cntCtrl.getAllUsers()">{{ user.name }}</p>-->
+
+<h4> contacts fetched by controller</h4>
+<li ng-repeat="user in cntCtrl.allUsrs">
+    {{ user.name }}
+</li>
+
 
 <p>
     <a href='#/help'>Help</a>
 </p>
+
+<hr>
+<h4> contacts fetched by service</h4>
+<p ng-repeat="user in cntCtrl.getAllUsers()">{{ user.name }}</p>
