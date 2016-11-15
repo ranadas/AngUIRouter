@@ -1,28 +1,30 @@
 <!-- partial-contact.html -->
 
-<h4>All Contacts</h4>
+<h1>All Contacts</h1>
 
-<!--<div ng-init="users = cntCtrl.allUsrs">-->
-    <!--<div> {{users}}</div>-->
-    <!--<div ng-repeat="user in users">-->
-        <!--{{$index + 1}}. {{user.name}}.-->
-    <!--</div>-->
-<!--</div>-->
+<!--<li ng-repeat="user in cntCtrl.users">-->
+<!--{{ user.name }}-->
+<!--</li>-->
 
- <!--Strangest issue, this ideally should call http service once, but it calls in -->
-<!--many times. WHY???? -->
-<!--<p ng-repeat="user in cntCtrl.getAllUsers()">{{ user.name }}</p>-->
-
-<h4> contacts fetched by controller</h4>
-<li ng-repeat="user in cntCtrl.allUsrs">
-    {{ user.name }}
-</li>
-
+<table class="table">
+    <thead>
+    <tr>
+        <th></th>
+        <th><span>Name</span></th>
+    </tr>
+    </thead>
+    <tr ng-repeat='user in cntCtrl.users'>
+        <td><div ng-include="'svgs/avatars.svg'"></div></td>
+        <td><p>{{user.name}}</p></td>
+    </tr>
+</table>
 
 <p>
     <a href='#/help'>Help</a>
 </p>
 
-<hr>
-<h4> contacts fetched by service</h4>
-<p ng-repeat="user in cntCtrl.getAllUsers()">{{ user.name }}</p>
+
+<!--
+svg icon set :
+https://codepen.io/clintonhalpin/pen/xBDqs
+-->
