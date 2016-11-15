@@ -24,6 +24,8 @@ app.use(express.static(path.join(__dirname, 'app')));
 app.use('/static', express.static(path.join(__dirname, 'public')));
 app.use('/bower_components', express.static(path.join(__dirname, 'app/bower_components')));
 app.use('/dist/views/', express.static(path.join(__dirname, 'app/dist/views')));
+app.use('/assets/', express.static(path.join(__dirname, 'app/dist/assets/')));
+app.use('/svgs/', express.static(path.join(__dirname, 'app/dist/assets/svg/')));
 app.use('/src/js/', express.static(path.join(__dirname, 'app/src/js')));
 
 app.use(express.static(path.join(__dirname, 'public', 'css')));
