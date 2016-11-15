@@ -33,28 +33,27 @@ routerApp.config(function ($stateProvider, $urlRouterProvider) {
 // Controller for partial-contact.html
 function ContactController(contactsService, $http) {
     var self = this;
+    self.contacts = contactsService.contactType;
 
-    self.contacts =  contactsService.contactTypes;
-    console.log('ContactController ' + self.contacts);
+    console.log('ContactController: ' + self.contacts);
 
-    (function getAllUsersSelfExecutingFunc() {
-        $http.get('/users/userlist')
-            .then(function successCallaback(response) {
-                    console.log("END in (self ex) : " + JSON.stringify(response.data));
-                    self.allUsrs = response.data;
-                }, function errorCallback(response) {
-                    console.log("Error " + response);
-                }
-            );
-    })();
+    self.users = null;
+    getAllServiceUsers();
 
+    function getAllServiceUsers() {
+        contactsService.allUsers().then(function (users) {
+            self.users = users;
+        });
+    }
 
-    function getAllUsersFromService() {
-        console.log('1.getting users from http Service.');
-        var returnedArray = contactsService.allUsers();
-        console.log("4. (returning response ) " + JSON.stringify(returnedArray));
-        return returnedArray;
-    };
-
-    self.getAllUsers = getAllUsersFromService;
+    //(function getAllUsersSelfExecutingFunc() {
+    //    $http.get('/users/userlist')
+    //        .then(function successCallaback(response) {
+    //                console.log("END in (self ex) : " + JSON.stringify(response.data));
+    //                self.allUsrs = response.data;
+    //            }, function errorCallback(response) {
+    //                console.log("Error " + response);
+    //            }
+    //        );
+    //})();
 }
