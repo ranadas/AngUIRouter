@@ -37,17 +37,18 @@ app.use(methodOverride());
 
 //var routes = require('./routes/index');
 var users = require('./routes/users');
+app.use('/users', users);
+
+var course = require('./routes/courses');
+app.use('/course', course);
 
 
 app.get('/', function(req, res) {
     res.sendfile('./app/index.html'); // load the single view file (angular will handle the page changes on the front-end)
 });
 
-app.use('/users', users);
-
 
 /// error handlers
-
 // development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {
@@ -92,5 +93,10 @@ var allowCrossDomain = function(req, res, next) {
 };
 app.use(allowCrossDomain);
 
-app.listen(port);
+//app.listen(port);
+app.listen(port, function () {
+    //require('./routes/route-doc')(app.router.mounts, 'restify');
+    require('./routes/route-doc')(app._router.stack, 'express');
+});
+
 console.log("NodeJs listening on port " + port);
