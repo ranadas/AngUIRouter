@@ -1,6 +1,6 @@
 'use strict';
 
-var routerApp = angular.module('routerApp', ['ui.router', 'contactsModule']);
+var routerApp = angular.module('routerApp', ['ui.router', 'contactsModule', 'courseModule']);
 
 routerApp.config(function ($stateProvider, $urlRouterProvider) {
 
@@ -11,6 +11,7 @@ routerApp.config(function ($stateProvider, $urlRouterProvider) {
             url: '/home',
             templateUrl: 'dist/views/partial-home.html'
         })
+
         .state('about', {
             url: '/about',
             templateUrl: 'dist/views/partial-about.html'
@@ -18,7 +19,9 @@ routerApp.config(function ($stateProvider, $urlRouterProvider) {
 
         .state('courses', {
             url: '/courses',
-            template: '<b> WIP</b> '
+            templateUrl: 'dist/views/partial-courses.html',
+            controller: CourseController,
+            controllerAs: 'crsCtrl'
         })
 
         .state('contacts', {
@@ -31,7 +34,7 @@ routerApp.config(function ($stateProvider, $urlRouterProvider) {
 });
 
 // Controller for partial-contact.html
-function ContactController(contactsService, $http) {
+function ContactController(contactsService) {
     var self = this;
     self.contacts = contactsService.contactType;
 
@@ -45,15 +48,46 @@ function ContactController(contactsService, $http) {
             self.users = users;
         });
     }
-
-    //(function getAllUsersSelfExecutingFunc() {
-    //    $http.get('/users/userlist')
-    //        .then(function successCallaback(response) {
-    //                console.log("END in (self ex) : " + JSON.stringify(response.data));
-    //                self.allUsrs = response.data;
-    //            }, function errorCallback(response) {
-    //                console.log("Error " + response);
-    //            }
-    //        );
-    //})();
 }
+
+// Controller for partial-courses.html
+function CourseController(courseService) {
+    var self = this;
+    console.log('in CourseController');
+
+    self.courses = null;
+    getCourses();
+
+    searchCourses("Ja");
+
+    function getCourses() {
+        courseService.courses().then(function (courses) {
+            self.courses = courses;
+        });
+    }
+
+    function searchCourses(searchString) {
+        courseService.searchByName(searchString).then(function (courses) {
+            console.log("----\n* " + JSON.stringify(courses) + "\n");
+            //TODO : self.courses = courses;
+        });
+    }
+}
+
+routerApp.filter('searchFor', function () {
+    console.log('in filter');
+    return function (arr, searchString) {
+        console.log('in filter with '+ JSON.stringify(arr) + " " + searchString);
+        if (!searchString) {
+            return arr;
+        }
+        var result = [];
+        searchString = searchString.toLowerCase();
+        angular.forEach(arr, function (course) {
+            if (course.name.toLowerCase().indexOf(searchString) !== -1) {
+                result.push(course);
+            }
+        });
+        return result;
+    };
+});

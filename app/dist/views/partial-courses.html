@@ -1,0 +1,30 @@
+<!-- partial-courses.html -->
+
+
+<h4>All Courses</h4>
+<div>
+    <input type="text" ng-model="search_filter" placeholder="Search course name" />
+</div>
+<ul class="data-ctrl">
+    <li ng-repeat='course in crsCtrl.courses | filter: search_filter'>
+        {{course.name}}
+    </li>
+</ul>
+
+<p>
+    <a href='#/help'>Help</a>
+</p>
+
+<h4 class="headName">Live search</h4>
+<div class="bar">
+    <input type="text"
+           class="search"
+           ng-model="searchString"
+           placeholder="Enter your search terms"
+           ng-keyup="(searchString.length >= 3) && getCoursesByName(searchString)" />
+</div>
+<ul class="data-ctrl">
+    <li ng-repeat="course in crsCtrl.courses | searchFor:searchString">
+        <p>{{course.name}}
+    </li>
+</ul>

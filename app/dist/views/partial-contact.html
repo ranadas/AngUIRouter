@@ -1,28 +1,18 @@
 <!-- partial-contact.html -->
 
-<h1>All Contacts</h1>
-
-<!--<li ng-repeat="user in cntCtrl.users">-->
-<!--{{ user.name }}-->
-<!--</li>-->
-
-<table class="table">
-    <thead>
-    <tr>
-        <th></th>
-        <th><span>Name</span></th>
-    </tr>
-    </thead>
-    <tr ng-repeat='user in cntCtrl.users'>
-        <td><div ng-include="'svgs/avatars.svg'"></div></td>
-        <td><p>{{user.name}}</p></td>
-    </tr>
-</table>
+<h4>All Contacts</h4>
+<div>
+    <input type="text" ng-model="search_filter" placeholder="Search" />
+</div>
+<ul>
+    <li ng-repeat='user in cntCtrl.users | filter: search_filter'>
+        {{user.name}}
+    </li>
+</ul>
 
 <p>
     <a href='#/help'>Help</a>
 </p>
-
 
 <!--
 svg icon set :
