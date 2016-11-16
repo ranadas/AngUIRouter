@@ -4,11 +4,13 @@ var router = express.Router();
 var _str = require('underscore.string');
 //var _und = require('underscore');
 var url = require('url');
+const chalk = require('chalk');
+const log = console.log;
 
 // middleware to use for all requests
 router.use(function(req, res, next) {
-    console.log('Something is happening. Request Body is :');
-    console.log(req.body);
+    log(chalk.green('Something is happening. Request Body is :') );
+    log(chalk.green(req.body));
     next();
 });
 
@@ -17,7 +19,7 @@ router.use(function(req, res, next) {
  * curl localhost:8088/course/courses
  */
 router.get('/courses', function(req, res) {
-    console.log("\n\n --> returning courses + " + courseList + "\n");
+    log(chalk.green("\n --> returning courses ") + chalk.yellow(JSON.stringify(courseList)));
     res.json(courseList);
 });
 
@@ -66,19 +68,20 @@ router.post('/save', function(req, res) {
 });
 
 function searchArray(courseSearchName) {
-    console.log("\n-->Searching courses containing name " + courseSearchName + "\n");
+    log(chalk.red('\n-->Searching courses containing name ', chalk.underline.blue.bgRed.bold(courseSearchName) + '!\n'));
+
     if (courseSearchName === undefined) {
         return "Invalid SEARCH TERM";
     }
     var foundArr = courseList.filter(function(element, index) {
         console.log(JSON.stringify(element) + " at index " + index);
         if (_str.include(_str.capitalize(element.name), _str.capitalize(courseSearchName))) {
-            console.log("\n- Found : " + JSON.stringify(element));
+            log(chalk.green("\n- Found : ") + chalk.blue(JSON.stringify(element)));
             return true;
         }
     });
+    log(chalk.green('- Returning Found :  %s'), JSON.stringify(foundArr));
 
-    console.log("\n- Returning Found : " + JSON.stringify(foundArr));
     return foundArr;
 }
 

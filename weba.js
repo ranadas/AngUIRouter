@@ -11,6 +11,9 @@ var http = require('http');
 var path = require('path');
 var favicon = require('serve-favicon');
 
+const chalk = require('chalk');
+const log = console.log;
+
 app.use(morgan('dev'));                                         // log every request to the console
 
 //https://github.com/expressjs/express/blob/master/examples/static-files/index.js
@@ -94,7 +97,9 @@ app.listen(port, function () {
     require('./routes/route-doc')(app._router.stack, 'express');
 });
 
-console.log("App listening on port " + port);
+
+log(chalk.green('\n\nApp listening on port') + ' ' + chalk.red(port));
+//console.log("App listening on port " + port);
 //console.log(users.stack);
 //console.log(courses.stack);
 //console.log(app._router.stack);
