@@ -1,13 +1,38 @@
 var express = require('express');
 var router = express.Router();
 
+var textUtils = require('./jsonutility');
+exports.Text = textUtils;
+
+
+https://www.npmjs.com/package/sprintf-js
+var sprintf = require("sprintf-js").sprintf,
+    vsprintf = require("sprintf-js").vsprintf;
+
 /*
  * GET userlist.
  * curl localhost:8088/users/userlist
  */
 router.get('/userlist', function(req, res) {
-    console.log("returning user list + " + usersList);
+    console.log(vsprintf("returning user list %s " + usersList));
     res.json(usersList);
+});
+
+router.get('/search', function(req, res) {
+    //var nm = req.getParameter("name");
+    //console.log("Searching for user with name " + nm);
+
+    usersList.forEach(function(item){
+        console.log(sprintf(' in ForEach -> %s - %s ',item.name , item.avatar));
+    });
+
+    console.log(textUtils.cleanText("rana p  dass"));
+    var userJsonString = JSON.stringify(usersList);
+    var js = JSON.parse(userJsonString);
+    //console.log(js);
+    var response = textUtils.getObjects(js,'name','Rana Das')
+
+    res.json(response);
 });
 
 
