@@ -9,6 +9,14 @@ https://www.npmjs.com/package/sprintf-js
 var sprintf = require("sprintf-js").sprintf,
     vsprintf = require("sprintf-js").vsprintf;
 
+// middleware to use for all requests
+router.use(function(req, res, next) {
+    console.log('Something is happening.');
+    console.log(" Request Boody : ");
+    console.log(req.body);
+    next();
+});
+
 /*
  * GET userlist.
  * curl localhost:8088/users/userlist
@@ -97,5 +105,5 @@ var usersList = [
     }
 ];
 
-
+require('./route-doc')(router.stack, 'express');
 module.exports = router;

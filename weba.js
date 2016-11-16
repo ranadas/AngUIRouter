@@ -1,6 +1,4 @@
 // node/express server js
-
-// set up ========================
 var express = require('express');
 var app = express();                                // create our app w/ express
 var port = process.env.PORT || 8088;
@@ -13,15 +11,11 @@ var http = require('http');
 var path = require('path');
 var favicon = require('serve-favicon');
 
-//var mongoose = require('mongoose');                     // mongoose for mongodb
-// configuration =================
-//mongoose.connect('mongodb://node:nodeuser@mongo.onmodulus.net:27017/uwO3mypu');     // connect to mongoDB database on modulus.io
-
 app.use(morgan('dev'));                                         // log every request to the console
 
 //https://github.com/expressjs/express/blob/master/examples/static-files/index.js
 app.use(express.static(path.join(__dirname, 'app')));
-app.use('/static', express.static(path.join(__dirname, 'public')));
+//app.use('/static', express.static(path.join(__dirname, 'public')));
 app.use('/bower_components', express.static(path.join(__dirname, 'app/bower_components')));
 app.use('/dist/views/', express.static(path.join(__dirname, 'app/dist/views')));
 app.use('/assets/', express.static(path.join(__dirname, 'app/dist/assets/')));
@@ -30,18 +24,16 @@ app.use('/src/js/', express.static(path.join(__dirname, 'app/src/js')));
 
 app.use(express.static(path.join(__dirname, 'public', 'css')));
 
-app.use(bodyParser.urlencoded({'extended': 'true'}));            // parse application/x-www-form-urlencoded
 app.use(bodyParser.json());                                     // parse application/json
+app.use(bodyParser.urlencoded({'extended': 'true'}));            // parse application/x-www-form-urlencoded
 app.use(bodyParser.json({type: 'application/vnd.api+json'})); // parse application/vnd.api+json as json
 app.use(methodOverride());
 
-//var routes = require('./routes/index');
 var users = require('./routes/users');
 app.use('/users', users);
 
-var course = require('./routes/courses');
-app.use('/course', course);
-
+var courses = require('./routes/courses');
+app.use('/course', courses);
 
 app.get('/', function(req, res) {
     res.sendfile('./app/index.html'); // load the single view file (angular will handle the page changes on the front-end)
@@ -72,6 +64,9 @@ app.use(function(err, req, res, next) {
     });
 });
 
+module.exports = app;
+app.use(errorHandler);
+
 
 module.exports = app;
 
@@ -99,4 +94,7 @@ app.listen(port, function () {
     require('./routes/route-doc')(app._router.stack, 'express');
 });
 
-console.log("NodeJs listening on port " + port);
+console.log("App listening on port " + port);
+//console.log(users.stack);
+//console.log(courses.stack);
+//console.log(app._router.stack);
