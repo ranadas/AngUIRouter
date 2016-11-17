@@ -4,17 +4,14 @@
     <p>
         <label>Course Name</label>
         <input type="text" name="name" ng-model="crsCtrl.coursename" required />
-    </p>
-    <p>
+
         <label>Course Active</label>
         <input type="radio" name="active" ng-model="crsCtrl.active" required />
-    </p>
 
-    <p>
         <label>Course Contents</label>
         <input type="text" name="contents" ng-model="crsCtrl.contents" required />
     </p>
-    <input type="submit" value="submit" ng-click="crsCtrl.submitToAdd()" class="btn btn-primary"/>
+    <input type="submit" value="Add New Course" ng-click="crsCtrl.submitToAdd()" class="btn btn-primary"/>
 </form>
 <div>
     Form valid : {{crsCtrl.status}}
@@ -31,6 +28,7 @@
 <ul class="data-ctrl">
     <li ng-repeat='course in crsCtrl.courses | filter: search_filter'>
         {{course.name}}
+        <img ng-src='dist/assets/images/{{course.logo}}' height="50" width="70">
     </li>
 </ul>
 

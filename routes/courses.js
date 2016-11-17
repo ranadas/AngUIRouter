@@ -7,10 +7,11 @@ var url = require('url');
 const chalk = require('chalk');
 const log = console.log;
 
+var SortedMap = require("collections/sorted-map");
+
 // middleware to use for all requests
 router.use(function(req, res, next) {
-    log(chalk.green('Something is happening. Request Body is :') );
-    log(chalk.green(JSON.stringify(req.body)));
+    log(chalk.green('Request Body is :') + chalk.green(JSON.stringify(req.body)));
     next();
 });
 
@@ -29,14 +30,14 @@ router.get('/courses', function(req, res) {
  */
 router.get('/search', function(req, res) {
     var courseSearchName = req.param("name");
-    console.log("\t--1:" + JSON.stringify(courseSearchName));
+    log(chalk.blue("\t--1:" + JSON.stringify(courseSearchName)));
     /*
      req.params
      req.body
      req.query
      */
     var respponse = searchArray(courseSearchName);
-    console.log(respponse);
+    log(chalk.green(respponse));
     res.json(respponse);
 });
 
@@ -44,7 +45,7 @@ router.get('/search', function(req, res) {
 //localhost:8088/course/search/<jav>
 router.get('/search/:query', function(req, res) {
     var query = req.params.query;
-    console.log("query = " + JSON.stringify(query));
+    log(chalk.yellow("search query is ") + chalk.blue(JSON.stringify(query)));
     // var query = url.parse(req.url, true).query;
     // console.log("query1 = " + JSON.stringify(query));
     var respponse = searchArray(query);
@@ -60,10 +61,11 @@ router.get('/cs/:storyId/elements', function(request, response) {
 });
 
 router.post('/save', function(req, res) {
-    console.log("POST: ");
-    console.log(req.body);
+    log(chalk.green("POSTing to add course:") + chalk.red(req.body));
+    // should be done a bit better, validations, etc.
     courseList.push(req.body);
-    console.log("\n --> After adding + " + JSON.stringify(courseList) + "\n");
+
+    log(chalk.green("\n --> After adding + " + JSON.stringify(courseList) + "\n"));
     res.json("OK");
 });
 
@@ -74,7 +76,7 @@ function searchArray(courseSearchName) {
         return "Invalid SEARCH TERM";
     }
     var foundArr = courseList.filter(function(element, index) {
-        console.log(JSON.stringify(element) + " at index " + index);
+        log(chalk.yellow.underline(JSON.stringify(element) + " at index " + index));
         if (_str.include(_str.capitalize(element.name), _str.capitalize(courseSearchName))) {
             log(chalk.green("\n- Found : ") + chalk.blue(JSON.stringify(element)));
             return true;
@@ -88,23 +90,29 @@ function searchArray(courseSearchName) {
 var courseList = [
     {
         "name": "Programing with Python",
-        "active": "true"
+        "active": "true",
+        "logo":"python.png"
+
     },
     {
         "name": "Introduction to HTML5",
-        "active": "true"
+        "active": "true",
+        "logo":"html5.png"
     },
     {
         "name": "Scratch for Beginers",
-        "active": "true"
+        "active": "true",
+        "logo":"scratch.png"
     },
     {
         "name": "Java",
-        "active": "true"
+        "active": "true",
+        "logo":"java.png"
     },
     {
-        "name": "Introduction to Webdesign",
-        "active": "true"
+        "name": "Introduction to Web Design",
+        "active": "true",
+        "logo":"generic-course.jpg"
     }
 ];
 
