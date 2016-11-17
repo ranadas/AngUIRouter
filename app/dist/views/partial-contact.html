@@ -7,6 +7,7 @@
 <ul>
     <li ng-repeat='user in cntCtrl.users | filter: search_filter'>
         {{user.name}}
+        <img ng-src='dist/assets/images/{{user.thumb}}' height="50" width="60">
     </li>
 </ul>
 
