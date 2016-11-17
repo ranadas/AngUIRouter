@@ -1,46 +1,48 @@
-var express = require('express');
-var router = express.Router();
+const chalk = require('chalk');
+const log = console.log;
 
-var textUtils = require('./jsonutility');
-exports.Text = textUtils;
+var sortedMap = require("collections/sorted-map");
 
-var cUtils = require('./controller-utility');
+module.exports = {
+    reqLogger: requestBodyLog,
+    course: courseList,
+    users: usersList
+};
 
-https://www.npmjs.com/package/sprintf-js
-var sprintf = require("sprintf-js").sprintf,
-    vsprintf = require("sprintf-js").vsprintf;
+// define functions
+function requestBodyLog(req, res, next) {
+    log(chalk.green('Request Body is :') + chalk.green(JSON.stringify(req.body)));
+    next();
+}
 
-// middleware to use for all requests
-router.use(function(req, res, next) {
-    cUtils.reqLogger(req, res, next);
-});
+var courseList = [
+    {
+        "name": "Programing with Python",
+        "active": "true",
+        "logo": "python.png"
 
-/*
- * GET userlist.
- * curl localhost:8088/users/userlist
- */
-router.get('/userlist', function(req, res) {
-    console.log(vsprintf("returning user list %s " + usersList));
-    res.json(usersList);
-});
-
-router.get('/search', function(req, res) {
-    //var nm = req.getParameter("name");
-    //console.log("Searching for user with name " + nm);
-
-    usersList.forEach(function(item){
-        console.log(sprintf(' in ForEach -> %s - %s ',item.name , item.avatar));
-    });
-
-    console.log(textUtils.cleanText("rana p  dass"));
-    var userJsonString = JSON.stringify(usersList);
-    var js = JSON.parse(userJsonString);
-    //console.log(js);
-    var response = textUtils.getObjects(js,'name','Rana Das')
-
-    res.json(response);
-});
-
+    },
+    {
+        "name": "Introduction to HTML5",
+        "active": "true",
+        "logo": "html5.png"
+    },
+    {
+        "name": "Scratch for Beginers",
+        "active": "true",
+        "logo": "scratch.png"
+    },
+    {
+        "name": "Java",
+        "active": "true",
+        "logo": "java.png"
+    },
+    {
+        "name": "Introduction to Web Design",
+        "active": "true",
+        "logo": "generic-course.jpg"
+    }
+];
 
 var usersList = [
     {
@@ -80,28 +82,25 @@ var usersList = [
         name: 'Jennifer Simonetti',
         avatar: 'svg-3',
         bio: 'Studies very well',
-        notes:[{title: "UCD ", date: new Date()}]
+        notes: [{title: "UCD ", date: new Date()}]
     },
     {
         name: 'Connal Murphy',
         avatar: 'svg-5',
         bio: 'Difficult',
-        notes:[{title: "Be nice to Rana", date: new Date()}]
+        notes: [{title: "Be nice to Rana", date: new Date()}]
 
     },
     {
         name: 'Zack Murphy',
         avatar: 'svg-2',
-        bio:'precious',
-        notes:[{title: "Zenga Man", date: new Date()}]
+        bio: 'precious',
+        notes: [{title: "Zenga Man", date: new Date()}]
     },
     {
         name: 'Alice Munrow',
         avatar: 'svg-3',
         bio: 'awesome',
-        notes:[{title: "Great Book", date: new Date()}]
+        notes: [{title: "Great Book", date: new Date()}]
     }
 ];
-
-require('./route-doc')(router.stack, 'express');
-module.exports = router;

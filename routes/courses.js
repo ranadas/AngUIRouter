@@ -7,12 +7,12 @@ var url = require('url');
 const chalk = require('chalk');
 const log = console.log;
 
-var SortedMap = require("collections/sorted-map");
+
+var cUtils = require('./controller-utility');
 
 // middleware to use for all requests
 router.use(function(req, res, next) {
-    log(chalk.green('Request Body is :') + chalk.green(JSON.stringify(req.body)));
-    next();
+    cUtils.reqLogger(req, res, next);
 });
 
 /*
