@@ -1,5 +1,5 @@
 'use strict';
-
+//http://plnkr.co/edit/IzimSVsstarlFviAm7S7?p=preview
 var routerApp = angular.module('routerApp', ['ui.router', 'contactsModule', 'courseModule']);
 
 routerApp.config(function ($stateProvider, $urlRouterProvider) {
@@ -58,7 +58,7 @@ function CourseController(courseService) {
     self.courses = null;
     getCourses();
 
-    searchCourses("Ja");
+    //searchCourses("Ja");
 
     function getCourses() {
         courseService.courses().then(function (courses) {
@@ -68,10 +68,26 @@ function CourseController(courseService) {
 
     function searchCourses(searchString) {
         courseService.searchByName(searchString).then(function (courses) {
-            console.log("----\n* " + JSON.stringify(courses) + "\n");
+            console.log("\n--* search response for " + searchString + ' is '+JSON.stringify(courses) + ".\n");
             //TODO : self.courses = courses;
         });
     }
+
+    self.submitToAdd = function () {
+        var isValid = self.courseForm.$valid;
+        self.status = isValid;
+        var newUser =  {
+            name: self.coursename,
+            active: self.active,
+            contents: self.contents
+        };
+
+        console.log("isValid " + isValid + '  ' + JSON.stringify(newUser));
+
+        courseService.addNewCourse(newUser).then( function(d){
+            console.log('after submit' + d);
+        });
+    };
 }
 
 routerApp.filter('searchFor', function () {

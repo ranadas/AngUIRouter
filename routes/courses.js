@@ -10,7 +10,7 @@ const log = console.log;
 // middleware to use for all requests
 router.use(function(req, res, next) {
     log(chalk.green('Something is happening. Request Body is :') );
-    log(chalk.green(req.body));
+    log(chalk.green(JSON.stringify(req.body)));
     next();
 });
 
