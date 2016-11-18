@@ -17,6 +17,21 @@ routerApp.config(function ($stateProvider, $urlRouterProvider) {
             templateUrl: 'dist/views/partial-about.html'
         })
 
+        .state('classes', {
+            url: '/classes',
+            template: '<h2> WIP </h2>'
+        })
+
+        .state('download', {
+            url: '/download',
+            template: '<h2> WIP </h2>'
+        })
+
+        .state('location', {
+            url: '/location',
+            templateUrl: 'dist/views/partial-our-location.html'
+        })
+
         .state('courses', {
             url: '/courses',
             templateUrl: 'dist/views/partial-courses.html',
