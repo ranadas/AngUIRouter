@@ -29,7 +29,9 @@ routerApp.config(function ($stateProvider, $urlRouterProvider) {
 
         .state('location', {
             url: '/location',
-            templateUrl: 'dist/views/partial-our-location.html'
+            templateUrl: 'dist/views/partial-our-location.html',
+            controller: LocationController,
+            controllerAs: 'locCtrl'
         })
 
         .state('courses', {
@@ -103,6 +105,25 @@ function CourseController(courseService) {
             console.log('after submit' + d);
         });
     };
+}
+
+
+// Controller for partial-courses.html
+function LocationController() {
+    var self = this;
+    console.log('in LocationController');
+
+    self.sendUserQuestion  = function sendQuestion() {
+
+        var newQuestion =  {
+            name: self.ename,
+            email: self.email,
+            message: self.message
+        };
+
+        console.log('sending UserQuestion' + JSON.stringify(newQuestion));
+    }
+
 }
 
 routerApp.filter('searchFor', function () {

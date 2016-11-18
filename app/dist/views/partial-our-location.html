@@ -1,5 +1,5 @@
 <div id="page5" class="content">
-    <div class="zerogrid contactdiv">
+    <div class="zerogrid">
         <div class="col-full">
             <div class="wrap-col">
                 <h4>Contact & Find Us</h4><br><br>
@@ -58,7 +58,8 @@
 
                     <div id="column2" style="float:left; margin:70;width:40%;">
                         <div class="text1" style="margin-left:10px">Ask a Question</div>
-                        <form id="questionform" action="questionform.php" method="post">
+                        <form name="locCtrl.questionform" novalidate class="table-condensed">
+                        <!--<form id="questionform" action="questionform.php">-->
                             <!--<div class="success_wrapper">-->
                             <!--<div class="success">Contact form submitted!<br>-->
                             <!--<strong>We will be in touch soon.</strong>-->
@@ -66,27 +67,27 @@
                             <!--</div>-->
                             <fieldset>
                                 <label class="name">
-                                    <input id="questionform_name" name="questionform_name"
+                                    <input name="name"
+                                           ng-model="locCtrl.name"
                                            type="text" placeholder="Enter Full Name"
                                            title="Your name is required." required style='width:250px;'/>
-                                    <div class="clear"></div>
                                 </label>
                                 <div class="clear"></div>
-                                <label class="questionform_email">
-                                    <input type="email" id="questionform_email" name="questionform_email"
+                                <label class="email">
+                                    <input type="email" name="email"
+                                           ng-model="locCtrl.email"
                                            class="h5-email"
                                            placeholder="Enter a valid email address" required style='width:250px;'>
-                                    <br class="clear">
                                 </label>
                                 <br class="clear">
                                 <label class="message">
-                                    <textarea name="questionform_message" required placeholder="message"
+                                    <textarea name="message"
+                                              ng-model="locCtrl.message"
+                                              required placeholder="message"
                                               required style='width:300px;' rows=10;></textarea>
-                                    <br class="clear">
                                 </label>
                                 <div class="clear"></div>
-                                <input type="submit" name="submit" value="Send" id="submit"/>
-                                <div class="clear"></div>
+                                <input type="submit" value="Send" ng-click="locCtrl.sendUserQuestion()"  class="btn btn-primary"/>
                             </fieldset>
                         </form>
                         <br>
