@@ -1,18 +1,19 @@
 // node/express server js
-var express = require('express');
-var app = express();                                // create our app w/ express
-var port = process.env.PORT || 8088;
+const express         = require('express');
+const app             = express();                                // create our app w/ express
+const port            = process.env.PORT || 8088;
 
-var morgan = require('morgan');                     // log requests to the console (express4)
-var bodyParser = require('body-parser');            // pull information from HTML POST (express4)
-var methodOverride = require('method-override');    // simulate DELETE and PUT (express4)
-var errorHandler = require('error-handler');
-var http = require('http');
-var path = require('path');
-var favicon = require('serve-favicon');
+const morgan          = require('morgan');                     // log requests to the console (express4)
+const bodyParser      = require('body-parser');            // pull information from HTML POST (express4)
+const methodOverride  = require('method-override');    // simulate DELETE and PUT (express4)
+const errorHandler    = require('error-handler');
+const http            = require('http');
+const path            = require('path');
+const favicon         = require('serve-favicon');
 
-const chalk = require('chalk');
+const chalk           = require('chalk');
 const log = console.log;
+const mongoose        = require('mongoose');
 
 app.use(morgan('dev'));                                         // log every request to the console
 
@@ -70,6 +71,10 @@ app.use(function(err, req, res, next) {
 module.exports = app;
 app.use(errorHandler);
 
+
+// mongoose
+var dbConfig = require('./config/db.js');
+mongoose.connect(dbConfig.url);
 
 module.exports = app;
 

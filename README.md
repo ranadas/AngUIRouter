@@ -6,3 +6,4 @@ then :
 2. node weba.js == http://localhost:8088/#/home
 
 
+https://scotch.io/tutorials/angular-routing-using-ui-router
