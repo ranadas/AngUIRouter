@@ -77,6 +77,7 @@ app.use(errorHandler);
 
 // mongoose
 var dbConfig = require('./config/db.js');
+mongoose.Promise = global.Promise;
 mongoose.connect(dbConfig.url);
 
 module.exports = app;
