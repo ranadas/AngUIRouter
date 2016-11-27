@@ -39,6 +39,9 @@ app.use('/users', users);
 var courses = require('./routes/courses');
 app.use('/course', courses);
 
+var contactUs = require('./routes/contactus-service');
+app.use('/contact', contactUs);
+
 app.get('/', function(req, res) {
     res.sendfile('./app/index.html'); // load the single view file (angular will handle the page changes on the front-end)
 });
