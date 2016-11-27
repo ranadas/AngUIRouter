@@ -1,6 +1,6 @@
 'use strict';
 //http://plnkr.co/edit/IzimSVsstarlFviAm7S7?p=preview
-var routerApp = angular.module('routerApp', ['ui.router', 'contactsModule', 'courseModule']);
+var routerApp = angular.module('routerApp', ['ui.router', 'contactsModule', 'courseModule', 'locationModule']);
 
 routerApp.config(function ($stateProvider, $urlRouterProvider) {
 
