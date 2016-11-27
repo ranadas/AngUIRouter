@@ -27,9 +27,10 @@ function CourseController(courseService) {
         var isValid = self.courseForm.$valid;
         self.status = isValid;
         var newUser =  {
-            name: self.coursename,
+            name: self.name,
             active: self.active,
-            contents: self.contents
+            remarks: self.remarks,
+            logo: self.logo
         };
 
         console.log("isValid " + isValid + '  ' + JSON.stringify(newUser));
