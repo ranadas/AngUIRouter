@@ -7,3 +7,5 @@ then :
 
 
 https://scotch.io/tutorials/angular-routing-using-ui-router
+
+https://github.com/akashgupta0210/Initial

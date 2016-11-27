@@ -1,0 +1,7 @@
+{"name": "Programing with Python", "active": "true", "logo": "python.png", "remarks": "for advanced students", "course_id": "01001" }
+{"name": "Introduction to HTML/CSS", "active": "true", "logo": "html5.png", "remarks": "for beginers", "course_id": "01002" }
+{"name": "Scratch for Beginers", "active": "true", "logo": "scratch.png", "remarks": "for beginers", "course_id": "01003" }
+{"name": "Java Programming", "active": "false", "logo": "java.png", "remarks": "for advenced", "course_id": "01004" }
+{"name": "Javascript Programming", "active": "false", "logo": "generic-course.jpg", "remarks": "for advenced", "course_id": "01005" }
+{"name": "Introduction to Web Design", "active": "true", "logo": "generic-course.jpg", "remarks": "for advenced", "course_id": "01006" }
+{"name": "Robotics", "active": "true", "logo": "generic-course.jpg", "remarks": "for advenced", "course_id": "01007" }
