@@ -33,10 +33,10 @@ app.use(bodyParser.urlencoded({'extended': 'true'}));            // parse applic
 app.use(bodyParser.json({type: 'application/vnd.api+json'})); // parse application/vnd.api+json as json
 app.use(methodOverride());
 
-var users = require('./routes/users');
+var users = require('./routes/users-service');
 app.use('/users', users);
 
-var courses = require('./routes/courses');
+var courses = require('./routes/course-service');
 app.use('/course', courses);
 
 var contactUs = require('./routes/contactus-service');
