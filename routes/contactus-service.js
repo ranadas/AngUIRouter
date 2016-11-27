@@ -51,11 +51,11 @@ function saveAQuestion(req, res) {
     newPost.save(function (err) {
         if (err) {
             log(chalk.red('\n-->ERROR !\n' + err));
-            return err;
+            return res.send(500, {error: err});
         }
         else {
-            log(chalk.red('\n-->new Question Save success !\n' + result));
-
+            log(chalk.red('\n-->new Question Save success !\n'));
+            res.send(200, {message: "question saved OK!"});
         }
     });
 }
