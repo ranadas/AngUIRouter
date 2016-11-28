@@ -47,6 +47,20 @@ routerApp.config(function ($stateProvider, $urlRouterProvider) {
             controller: ContactController,
             controllerAs: 'cntCtrl'
         })
+
+        .state('login', {
+            url: '/login',
+            templateUrl: 'dist/views/partial-login.html',
+            controller: LoginController,
+            controllerAs: 'loginCtrl'
+        })
+
+        .state('register', {
+            url: '/register',
+            templateUrl: 'dist/views/partial-register.html',
+            controller: RegisterController,
+            controllerAs: 'regCtrl'
+        })
     ;
 });
 
@@ -67,3 +81,12 @@ routerApp.filter('searchFor', function () {
         return result;
     };
 });
+
+
+function RegisterController() {
+    console.log('in RegisterController');
+}
+
+function LoginController() {
+    console.log('in LoginController');
+}
