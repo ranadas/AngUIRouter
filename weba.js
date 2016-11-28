@@ -107,7 +107,7 @@ app.listen(port, function () {
 });
 
 
-log(chalk.green('\n\nApp listening on port') + ' ' + chalk.red(port));
+log(chalk.green('\n\nApplication listening on port: ') + chalk.red.bgCyan.underline(port));
 //console.log("App listening on port " + port);
 //console.log(users.stack);
 //console.log(courses.stack);

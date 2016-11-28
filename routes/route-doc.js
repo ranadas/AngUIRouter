@@ -1,11 +1,16 @@
+'use strict';
+
+const chalk     = require('chalk');
+const log       = console.log;
 module.exports = function (routes, src) {
+
     var Table = require('cli-table');
     var table = new Table({head: ["", "Name", "Path"]});
-    console.log('\nAPI for this service \n');
+    log(chalk.italic('*=> API for this service'));
     if (src == 'restify') {
-        console.log('\n********************************************');
-        console.log('\t\tRESTIFY');
-        console.log('********************************************\n');
+        log(chalk.blue('\n********************************************'));
+        log(chalk.green('\t\tRESTIFY'));
+        log(chalk.blue('********************************************\n'));
         for (var key in routes) {
             if (routes.hasOwnProperty(key)) {
                 var val = routes[key];
@@ -16,9 +21,9 @@ module.exports = function (routes, src) {
         }
     }
     else {
-        console.log('\n********************************************');
-        console.log('\t\tEXPRESS');
-        console.log('********************************************\n');
+        log(chalk.green('\n********************************************'));
+        log(chalk.blue.bold('\t\tEXPRESS'));
+        log(chalk.green('********************************************\n'));
         for (var key in routes) {
             if (routes.hasOwnProperty(key)) {
                 var val = routes[key];
@@ -31,6 +36,6 @@ module.exports = function (routes, src) {
             }
         }
     }
-    console.log(table.toString());
+    log(chalk.yellow(table.toString()));
     return table;
 };
