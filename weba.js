@@ -16,6 +16,7 @@ const log = console.log;
 const mongoose        = require('mongoose');
 
 app.use(morgan('dev'));                                         // log every request to the console
+process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
 //https://github.com/expressjs/express/blob/master/examples/static-files/index.js
 app.use(express.static(path.join(__dirname, 'app')));
@@ -50,7 +51,7 @@ app.get('/', function(req, res) {
 /// error handlers
 // development error handler
 // will print stacktrace
-if (app.get('env') === 'development') {
+if (app.get('env') === 'dev') {
     app.use(function(err, req, res, next) {
         res.status(err.status || 500);
         res.render('error', {
@@ -74,11 +75,17 @@ app.use(function(err, req, res, next) {
 module.exports = app;
 app.use(errorHandler);
 
-
 // mongoose
-var dbConfig = require('./config/db.js');
-mongoose.Promise = global.Promise;
-mongoose.connect(dbConfig.url);
+if (app.get('env') === 'development') {
+
+    var dbConfig = require('./config/db.js');
+    mongoose.Promise = global.Promise;
+    mongoose.connect(dbConfig.url);
+} else {
+    log(chalk.red('\n-->ERROR , we have NOT configured this !\n'));
+    mongoose.connect(dbConfig.produrl);
+}
+
 
 module.exports = app;
 
@@ -100,12 +107,10 @@ var allowCrossDomain = function(req, res, next) {
 };
 app.use(allowCrossDomain);
 
-process.env.NODE_ENV = process.env.NODE_ENV || 'development';
-
 //app.listen(port);
 app.listen(port, function () {
     require('./routes/route-doc')(app._router.stack, 'express');
 });
 
-
-log(chalk.green('\n\nApplication listening on port: ') + chalk.red.bgCyan.underline(port));
+log(chalk.red.bgYellow(" Application Run MODE : "+ app.get('env')));
+log(chalk.green('\nApplication listening on port: ') + chalk.red.bgCyan.underline(port) + "\n");
