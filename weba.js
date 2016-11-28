@@ -103,7 +103,7 @@ app.use(allowCrossDomain);
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
 //app.listen(port);
-app.listen(port, function () {adding node ENV
+app.listen(port, function () {
     require('./routes/route-doc')(app._router.stack, 'express');
 });
 
