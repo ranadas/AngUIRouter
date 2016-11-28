@@ -100,15 +100,12 @@ var allowCrossDomain = function(req, res, next) {
 };
 app.use(allowCrossDomain);
 
+process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+
 //app.listen(port);
-app.listen(port, function () {
-    //require('./routes/route-doc')(app.router.mounts, 'restify');
+app.listen(port, function () {adding node ENV
     require('./routes/route-doc')(app._router.stack, 'express');
 });
 
 
 log(chalk.green('\n\nApplication listening on port: ') + chalk.red.bgCyan.underline(port));
-//console.log("App listening on port " + port);
-//console.log(users.stack);
-//console.log(courses.stack);
-//console.log(app._router.stack);
