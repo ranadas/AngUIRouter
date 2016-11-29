@@ -85,8 +85,37 @@ routerApp.filter('searchFor', function () {
 
 function RegisterController() {
     console.log('in RegisterController');
+    var vm = this;
+
+    vm.credentials = {
+        name : "",
+        email : "",
+        password : ""
+    };
+
+    vm.onSubmit = function () {
+        console.log(' yeah right, registering with '+ JSON.stringify(vm.credentials));
+        //authentication
+        //    .login(vm.credentials)
+        //    .error(function(err){
+        //        alert(err);
+        //    })
+        //    .then(function(){
+        //        $location.path('profile');
+        //    });
+    };
 }
 
 function LoginController() {
     console.log('in LoginController');
+    var vm = this;
+
+    vm.credentials = {
+        email : "",
+        password : ""
+    };
+
+    vm.onSubmit = function () {
+        console.log(' yeah right, log in now with '+ JSON.stringify(vm.credentials));
+    }
 }

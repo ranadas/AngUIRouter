@@ -1,3 +1,43 @@
-<p>
-    register
-</p>
+<!--
+    username: {type: String, required: true, trim: true, unique: true},
+    password: String,
+    email: {type: String, required: true, trim: true, unique: true},
+    gender: {type: String, required: true, trim: true},
+    type: {type: String, required: false, trim: true},
+    address: {type: String, required: false, trim: true},
+    name: {type: String, required: true, trim: true},
+    avatar: {type: String, required: false, trim: true},
+    bios: {type: String, required: false, trim: true},
+    notes: {},
+    thumb: {type: String, required: false, trim: true}
+-->
+<navigation></navigation>
+
+<div class="container">
+
+    <div class="row">
+        <div class="col-md-6">
+            <h1>Register</h1>
+            <p class="lead">Already a member? Please <a href="login">log in</a> instead.</p>
+            <form ng-submit="regCtrl.onSubmit()">
+                <div class="form-group">
+                    <label for="name">Full name</label>
+                    <input type="text" class="form-control" id="name" placeholder="Enter your name"
+                           ng-model="regCtrl.credentials.name">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email address</label>
+                    <input type="email" class="form-control" id="email" placeholder="Enter email"
+                           ng-model="regCtrl.credentials.email">
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" id="password" placeholder="Password"
+                           ng-model="regCtrl.credentials.password">
+                </div>
+                <button type="submit" class="btn btn-default">Register!</button>
+            </form>
+        </div>
+    </div>
+
+</div>
